@@ -6,13 +6,13 @@ const AXIOS_BTN = document.querySelector("#axios");
 
 const API = "http://localhost:1337/posts";
 
-let data;
-
 const fetchApi = async () => {
   try {
     const res = await fetch(API);
-    data = await res.json();
+    const data = await res.json();
+
     console.log({ data });
+    return data;
   } catch (error) {
     console.log(error);
     console.log(error.response?.data);
@@ -22,8 +22,10 @@ const fetchApi = async () => {
 const axiosApi = async () => {
   try {
     const res = await Axios.get(API);
-    data = res.data;
+    const { data } = res;
+
     console.log({ data });
+    return data;
   } catch (error) {
     console.log(error);
     console.log(error.response?.data);
@@ -31,7 +33,7 @@ const axiosApi = async () => {
 };
 
 const handleRequest = async func => {
-  await func();
+  const data = await func();
   DISPLAY.innerText = JSON.stringify(data, undefined, 2);
 };
 
