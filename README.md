@@ -1,6 +1,6 @@
 # A small detail in the difference of Fetch and Axios
 
-The articles on [hashnode](brains.hashnode.dev/fetch-vs-axios) and [devto]() have detailed explanation on this topic
+The articles on [hashnode](brains.hashnode.dev/error-handling-in-fetch-vs-axios) and [devto](https://dev.to/bugs_bunny/error-handling-in-fetch-vs-axios-8fk) have detailed explanation on this topic
 
 ## How to run the script
 
