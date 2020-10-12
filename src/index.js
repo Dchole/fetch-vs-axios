@@ -6,35 +6,43 @@ const AXIOS_BTN = document.querySelector("#axios");
 
 const API = "http://localhost:1337/posts";
 
+let error;
+
 const fetchApi = async () => {
   try {
-    const res = await fetch(API);
+    const res = await fetch(`${API}/1`);
     const data = await res.json();
 
-    console.log({ data });
+    if (!res.ok) {
+      error = data;
+      return undefined;
+    }
+
     return data;
-  } catch (error) {
-    console.log(error);
-    console.log(error.response?.data);
+  } catch (err) {
+    error = err;
   }
 };
 
 const axiosApi = async () => {
   try {
-    const res = await Axios.get(API);
+    const res = await Axios.get(`${API}/1`);
     const { data } = res;
 
-    console.log({ data });
     return data;
-  } catch (error) {
-    console.log(error);
-    console.log(error.response?.data);
+  } catch (err) {
+    error = err.response.data;
   }
 };
 
 const handleRequest = async func => {
   const data = await func();
-  DISPLAY.innerText = JSON.stringify(data, undefined, 2);
+  if (data) {
+    DISPLAY.innerText = JSON.stringify(data, undefined, 2);
+  } else {
+    DISPLAY.innerText = JSON.stringify(error, undefined, 2);
+    DISPLAY.className = "error";
+  }
 };
 
 FETCH_BTN.addEventListener("click", async () => await handleRequest(fetchApi));
